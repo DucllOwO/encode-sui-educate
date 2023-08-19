@@ -1,3 +1,4 @@
+
 module car::car_shop {
     
     use sui::transfer;
@@ -29,6 +30,7 @@ module car::car_shop {
             id: object::new(ctx)
         }, tx_context::sender(ctx));
 
+        // this will create a share object and every one can interact with it
         transfer::share_object(CarShop {
             id: object::new(ctx),
             price: 100,
@@ -56,7 +58,7 @@ module car::car_shop {
         let amount = balance::value(&shop.balance);
         let profits = coin::take(&mut shop.balance, amount, ctx);
 
-        transfer::transfer(profits, tx_context::sender(ctx))
+        transfer::public_transfer(profits, tx_context::sender(ctx))
     }
 
 }

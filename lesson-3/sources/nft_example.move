@@ -11,7 +11,6 @@ module nft_tutorial::nft_example {
         name: String,
         description: String,
         url: Url,
-        // ... Additional attributes for various use cases (i.e. game, social profile, etc.)
     }
 
     public entry fun mint_to_sender(
@@ -29,6 +28,10 @@ module nft_tutorial::nft_example {
         };
 
         transfer::transfer(nft, sender);
+    }
+
+    public entry fun transfer(nft: NFT, recipient: address) {
+        transfer::transfer(nft, recipient);
     }
 
 }
